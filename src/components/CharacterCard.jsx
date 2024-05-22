@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 export const CharacterCard = ({chara}) => {
 
   return (
+    <>
     <Link to={`/${chara.name}`}>
       <article>
         <img src={chara.image} />
@@ -10,6 +11,8 @@ export const CharacterCard = ({chara}) => {
         <p>{chara.species}{chara.status === "Dead" ? " 💀" : null}</p>
       </article>
     </Link>
+
+    </>
   )
 }
 

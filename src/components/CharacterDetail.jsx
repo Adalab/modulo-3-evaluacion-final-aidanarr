@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export const CharacterDetail = ({getCharaData}) => {
 
@@ -7,10 +8,9 @@ export const CharacterDetail = ({getCharaData}) => {
 
   // Guardamos los datos del personaje en una variable usando la función getCharaData
   const data = getCharaData(name);
-  
-  console.log(name);
 
   return (
+    <>
     <article>
       <img src={data.image} />
       <p>{data.name}</p>
@@ -19,6 +19,10 @@ export const CharacterDetail = ({getCharaData}) => {
       <p>Origin: {data.origin}</p>
       <p>Episodes: {data.episodes}</p>
     </article>
+    <Link to="/">
+      <p>Volver</p>
+    </Link>
+    </>
   )
 }
 

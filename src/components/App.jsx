@@ -11,10 +11,16 @@ function App() {
   // Variables de estado
   const [charaList, setCharaList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [noCharaMsg, setNoCharaMsg] = useState(null);
 
   // useEffect para sacar los datos del fetch y meterlos en la variable de estado al cargar la página
   useEffect(() => {
     fetchData().then((data) => setCharaList(data));
+  }, []);
+
+  // otro fetch para meter los mismos datos en filteredData
+  useEffect(() => {
+    fetchData().then((data) => setFilteredData(data));
   }, []);
 
   // Función para filtrar personajes: del array de personajes filtramos aquellos que incluyan el valor del input (en minúscula) y luego lo metemos en filteredData
@@ -22,6 +28,7 @@ function App() {
     const filter = charaList.filter((chara) => chara.name.toLowerCase().includes(value));
     setFilteredData(filter)
   };
+
   
   const getCharaData = (name) => {
     // Buscamos el personaje que coincida dentro del array original
@@ -29,19 +36,23 @@ function App() {
     return clickedChara
   }
 
+
   return (
     <>
     <main>
       <Routes>
         <Route path="/" element={
           <>
-            <Filters filterCharas={filterCharas} />
-            <CharacterList filteredData={filteredData} charaList={charaList}/>
+            <Filters setNoCharaMsg={setNoCharaMsg} filterCharas={filterCharas} />
+            <CharacterList noCharaMsg={noCharaMsg} filteredData={filteredData} charaList={charaList}/>
           </>
         }/>
-        <Route path="/:name" element={<CharacterDetail charaList={charaList} getCharaData={getCharaData} />}/>
+        <Route path="/:name" element={<CharacterDetail getCharaData={getCharaData} />}/>
       </Routes>
+      {/* Nos renderiza el texto de error en la búsqueda si el array del filtro está vacío */}
+    {filteredData.length === 0 ? <p>{noCharaMsg}</p> : null}
     </main>
+    
     </>
   )
 }
