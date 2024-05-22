@@ -2,6 +2,7 @@ import "../styles/App.scss"
 import { Route, Routes } from "react-router-dom";
 import Filters from "./Filters.jsx"
 import CharacterList from "./CharacterList.jsx"
+import CharacterDetail from "./CharacterDetail.jsx"
 import { useState, useEffect } from "react";
 import fetchData from "../services/fetchData.js";
 
@@ -22,6 +23,11 @@ function App() {
     setFilteredData(filter)
   };
   
+  const getCharaData = (name) => {
+    // Buscamos el personaje que coincida dentro del array original
+    const clickedChara = charaList.find((chara) => chara.name === name);
+    return clickedChara
+  }
 
   return (
     <>
@@ -33,6 +39,7 @@ function App() {
             <CharacterList filteredData={filteredData} charaList={charaList}/>
           </>
         }/>
+        <Route path="/:name" element={<CharacterDetail charaList={charaList} getCharaData={getCharaData} />}/>
       </Routes>
     </main>
     </>
