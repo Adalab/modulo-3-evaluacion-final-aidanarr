@@ -1,30 +1,32 @@
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom";
+import NotFound from "./NotFound";
 
-export const CharacterDetail = ({getCharaData, charaList}) => {
+export const CharacterDetail = ({getCharaData }) => {
 
   // Con useParams averiguamos el name del personaje de la ruta dinámica
-  const {name} = useParams();
+  const {id} = useParams();
 
   // Guardamos los datos del personaje en una variable usando la función getCharaData
-  const data = getCharaData(name);
+  const data = getCharaData(id);
 
-  console.log(charaList);
+  console.log(data);
 
   return (
     <>
-    <article>
+      {data ? <article>
       <img src={data.image} />
       <p>{data.name}</p>
       <p>Status: {data.status}</p>
       <p>Species: {data.species}</p>
       <p>Origin: {data.origin}</p>
       <p>Episodes: {data.episodes}</p>
-    </article>
+    </article> : <NotFound />}
     <Link to="/">
       <p>Volver</p>
     </Link>
     </>
+    
   )
 }
 

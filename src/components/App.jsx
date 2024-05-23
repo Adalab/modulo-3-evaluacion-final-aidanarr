@@ -32,9 +32,9 @@ function App() {
   };
 
   
-  const getCharaData = (name) => {
+  const getCharaData = (parameter) => {
     // Buscamos el personaje que coincida dentro del array original
-    const clickedChara = charaList.find((chara) => chara.name === name);
+    const clickedChara = charaList.find((chara) => chara.id === parseInt(parameter));
     return clickedChara
   }
 
@@ -49,7 +49,7 @@ function App() {
             <CharacterList noCharaMsg={noCharaMsg} filteredData={filteredData} charaList={charaList}/>
           </>
         }/>
-        <Route path="/:name" element={<CharacterDetail charaList={charaList} getCharaData={getCharaData} />}/>
+        <Route path="/detail/:id" element={<CharacterDetail getCharaData={getCharaData} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       {/* Nos renderiza el texto de error en la búsqueda si el array del filtro está vacío */}

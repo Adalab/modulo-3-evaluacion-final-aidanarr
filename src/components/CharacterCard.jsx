@@ -4,7 +4,7 @@ export const CharacterCard = ({chara}) => {
 
   return (
     <>
-    <Link to={`/${chara.name}`}>
+    <Link to={`/detail/${chara.id}`}>
       <article>
         <img src={chara.image} />
         <p>{chara.name}</p>
