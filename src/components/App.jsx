@@ -32,18 +32,6 @@ function App() {
   // Función para filtrar personajes: del array de personajes filtramos aquellos que incluyan el valor del input (en minúscula) y luego lo metemos en filteredData
   const filterCharas = charaList.filter((chara) => valueInput ? chara.name.toLowerCase().includes(valueInput.toLowerCase()) : true).filter((chara) => valueStatus ? valueStatus === chara.status : true).filter((chara) => valueSpecies ? valueSpecies === chara.species : true)
 
- 
-
-  // const filterStatus = (value) => {
-  //   if (valueStatus !== "") {
-  //     const filter = charaList.filter((chara) => chara.status === value)
-  //     setFilteredData(filter)
-  //   } else {
-  //     setFilteredData(charaList);
-  //   }
-    
-  // }
-
   
   const getCharaData = (parameter) => {
     // Buscamos el personaje que coincida dentro del array original
