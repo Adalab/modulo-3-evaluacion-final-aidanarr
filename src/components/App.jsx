@@ -6,6 +6,8 @@ import CharacterDetail from "./CharacterDetail.jsx"
 import { useState, useEffect } from "react";
 import fetchData from "../services/fetchData.js";
 import NotFound from "./NotFound.jsx";
+import FilterStatus from "./FilterStatus.jsx";
+import FilterSpecies from "./FilterSpecies.jsx";
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
   const [filteredData, setFilteredData] = useState([]);
   const [noCharaMsg, setNoCharaMsg] = useState(null);
   const [valueInput, setValueInput] = useState("");
+  const [valueStatus, setValueStatus] = useState("");
+  const [valueSpecies, setValueSpecies] = useState("");
 
   // useEffect para sacar los datos del fetch y meterlos en la variable de estado al cargar la página
   useEffect(() => {
@@ -26,10 +30,19 @@ function App() {
   }, []);
 
   // Función para filtrar personajes: del array de personajes filtramos aquellos que incluyan el valor del input (en minúscula) y luego lo metemos en filteredData
-  const filterCharas = (value) => {
-    const filter = charaList.filter((chara) => chara.name.toLowerCase().includes(value));
-    setFilteredData(filter)
-  };
+  const filterCharas = charaList.filter((chara) => valueInput ? chara.name.toLowerCase().includes(valueInput.toLowerCase()) : true).filter((chara) => valueStatus ? valueStatus === chara.status : true).filter((chara) => valueSpecies ? valueSpecies === chara.species : true)
+
+ 
+
+  // const filterStatus = (value) => {
+  //   if (valueStatus !== "") {
+  //     const filter = charaList.filter((chara) => chara.status === value)
+  //     setFilteredData(filter)
+  //   } else {
+  //     setFilteredData(charaList);
+  //   }
+    
+  // }
 
   
   const getCharaData = (parameter) => {
@@ -45,15 +58,19 @@ function App() {
       <Routes>
         <Route path="/" element={
           <>
+            <form>
             <Filters valueInput={valueInput} setValueInput={setValueInput} setNoCharaMsg={setNoCharaMsg} filterCharas={filterCharas} />
-            <CharacterList noCharaMsg={noCharaMsg} filteredData={filteredData} charaList={charaList}/>
+            <FilterStatus valueStatus={valueStatus} setValueStatus={setValueStatus} />
+            <FilterSpecies valueSpecies={valueSpecies} setValueSpecies={setValueSpecies} />
+            </form>
+            <CharacterList noCharaMsg={noCharaMsg} filteredData={filteredData} filterCharas={filterCharas} charaList={charaList}/>
           </>
         }/>
         <Route path="/detail/:id" element={<CharacterDetail getCharaData={getCharaData} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       {/* Nos renderiza el texto de error en la búsqueda si el array del filtro está vacío */}
-    {filteredData.length === 0 ? <p>{noCharaMsg}</p> : null}
+    {filterCharas.length === 0 ? <p>{noCharaMsg}</p> : null}
     </main>
     
     </>
