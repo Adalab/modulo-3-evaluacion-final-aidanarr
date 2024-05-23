@@ -9,6 +9,8 @@ export const Filters = (props) => {
 
     // Ejecutamos la función para establecer el mensaje de error en el buscador
     props.setNoCharaMsg(`No existe ningún personaje llamado ` + value);
+
+    props.setValueInput(value);
   }
 
   const handleKeyDown = (ev) => {
@@ -19,7 +21,7 @@ export const Filters = (props) => {
 
   return (
     <form>
-      <input type="text" onChange={handleChange} onKeyDown={handleKeyDown} />
+      <input type="text" onChange={handleChange} onKeyDown={handleKeyDown} value={props.valueInput} />
     </form>
   )
 }

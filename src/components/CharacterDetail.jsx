@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom";
 
-export const CharacterDetail = ({getCharaData}) => {
+export const CharacterDetail = ({getCharaData, charaList}) => {
 
   // Con useParams averiguamos el name del personaje de la ruta dinámica
   const {name} = useParams();
 
   // Guardamos los datos del personaje en una variable usando la función getCharaData
   const data = getCharaData(name);
+
+  console.log(charaList);
 
   return (
     <>

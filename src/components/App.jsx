@@ -5,6 +5,7 @@ import CharacterList from "./CharacterList.jsx"
 import CharacterDetail from "./CharacterDetail.jsx"
 import { useState, useEffect } from "react";
 import fetchData from "../services/fetchData.js";
+import NotFound from "./NotFound.jsx";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
   const [charaList, setCharaList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [noCharaMsg, setNoCharaMsg] = useState(null);
+  const [valueInput, setValueInput] = useState("");
 
   // useEffect para sacar los datos del fetch y meterlos en la variable de estado al cargar la página
   useEffect(() => {
@@ -43,11 +45,12 @@ function App() {
       <Routes>
         <Route path="/" element={
           <>
-            <Filters setNoCharaMsg={setNoCharaMsg} filterCharas={filterCharas} />
+            <Filters valueInput={valueInput} setValueInput={setValueInput} setNoCharaMsg={setNoCharaMsg} filterCharas={filterCharas} />
             <CharacterList noCharaMsg={noCharaMsg} filteredData={filteredData} charaList={charaList}/>
           </>
         }/>
-        <Route path="/:name" element={<CharacterDetail getCharaData={getCharaData} />}/>
+        <Route path="/:name" element={<CharacterDetail charaList={charaList} getCharaData={getCharaData} />}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {/* Nos renderiza el texto de error en la búsqueda si el array del filtro está vacío */}
     {filteredData.length === 0 ? <p>{noCharaMsg}</p> : null}
