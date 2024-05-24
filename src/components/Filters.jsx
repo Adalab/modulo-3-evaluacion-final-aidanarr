@@ -1,4 +1,4 @@
-
+import "../styles/Filters.scss"
 
 export const Filters = (props) => {
 
@@ -20,7 +20,7 @@ export const Filters = (props) => {
   }
 
   return (
-      <input type="text" id="name" onChange={handleChange} onKeyDown={handleKeyDown} value={props.valueInput} />   
+      <input className="input" type="text" id="name" onChange={handleChange} onKeyDown={handleKeyDown} value={props.valueInput} placeholder="Search here" />   
   )
 }
 

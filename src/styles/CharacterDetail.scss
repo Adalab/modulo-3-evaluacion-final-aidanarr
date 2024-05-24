@@ -1,0 +1,45 @@
+.detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__card {
+        width: 40%;
+        font-weight: 200;
+        background-color: #4d4d4d;
+        color: white;
+        display: flex;
+
+        &--info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.card-name {
+    font-weight: 500;
+    padding-bottom: 15px;
+}
+
+.return {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+    &__box {
+        width: 40%;
+
+        &--text {
+            color: #10AEC6;
+
+            &:hover {
+                color: #9EF77B;
+            }
+        } 
+    }
+     
+}

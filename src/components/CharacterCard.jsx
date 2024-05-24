@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom"
+import "../styles/CharacterCard.scss"
 
 export const CharacterCard = ({chara}) => {
 
   return (
     <>
-    <Link to={`/detail/${chara.id}`}>
-      <article>
+    <Link to={`/detail/${chara.id}`} className="link">
+      <article className="card">
         <img src={chara.image} />
-        <p>{chara.name}</p>
-        <p>{chara.species}{chara.status === "Dead" ? " 💀" : null}</p>
+        <p className="card__name">{chara.name}</p>
+        <p className="card__details">{chara.species}{chara.status === "Dead" ? " 💀" : null}</p>
       </article>
     </Link>
 

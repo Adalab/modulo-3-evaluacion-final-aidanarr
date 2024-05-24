@@ -8,12 +8,12 @@ import fetchData from "../services/fetchData.js";
 import NotFound from "./NotFound.jsx";
 import FilterStatus from "./FilterStatus.jsx";
 import FilterSpecies from "./FilterSpecies.jsx";
+import Header from "./Header.jsx";
 
 function App() {
 
   // Variables de estado
   const [charaList, setCharaList] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
   const [noCharaMsg, setNoCharaMsg] = useState(null);
   const [valueInput, setValueInput] = useState("");
   const [valueStatus, setValueStatus] = useState("");
@@ -24,17 +24,13 @@ function App() {
     fetchData().then((data) => setCharaList(data));
   }, []);
 
-  // otro fetch para meter los mismos datos en filteredData
-  useEffect(() => {
-    fetchData().then((data) => setFilteredData(data));
-  }, []);
 
-  // Función para filtrar personajes: del array de personajes filtramos aquellos que incluyan el valor del input (en minúscula) y luego lo metemos en filteredData
+  // Variable que guarda el array aplicando los distintos filtros
   const filterCharas = charaList.filter((chara) => valueInput ? chara.name.toLowerCase().includes(valueInput.toLowerCase()) : true).filter((chara) => valueStatus ? valueStatus === chara.status : true).filter((chara) => valueSpecies ? valueSpecies === chara.species : true)
 
   
   const getCharaData = (parameter) => {
-    // Buscamos el personaje que coincida dentro del array original
+    // Buscamos el personaje que coincida dentro del array original para utilizarlo en el componente Detail
     const clickedChara = charaList.find((chara) => chara.id === parseInt(parameter));
     return clickedChara
   }
@@ -42,23 +38,26 @@ function App() {
 
   return (
     <>
-    <main>
+    <Header />
+    <main className="main">
       <Routes>
         <Route path="/" element={
           <>
-            <form>
-            <Filters valueInput={valueInput} setValueInput={setValueInput} setNoCharaMsg={setNoCharaMsg} filterCharas={filterCharas} />
-            <FilterStatus valueStatus={valueStatus} setValueStatus={setValueStatus} />
-            <FilterSpecies valueSpecies={valueSpecies} setValueSpecies={setValueSpecies} />
+            <form className="form">
+              <Filters valueInput={valueInput} setValueInput={setValueInput} setNoCharaMsg={setNoCharaMsg} filterCharas={filterCharas} />
+              <div className="form__select">
+                <FilterStatus valueStatus={valueStatus} setValueStatus={setValueStatus} />
+                <FilterSpecies valueSpecies={valueSpecies} setValueSpecies={setValueSpecies} />
+              </div>
             </form>
-            <CharacterList noCharaMsg={noCharaMsg} filteredData={filteredData} filterCharas={filterCharas} charaList={charaList}/>
+            <CharacterList noCharaMsg={noCharaMsg}  filterCharas={filterCharas} charaList={charaList}/>
           </>
         }/>
         <Route path="/detail/:id" element={<CharacterDetail getCharaData={getCharaData} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       {/* Nos renderiza el texto de error en la búsqueda si el array del filtro está vacío */}
-    {filterCharas.length === 0 ? <p>{noCharaMsg}</p> : null}
+    {filterCharas.length === 0 ? <div className="no-chara"><p>{noCharaMsg}</p></div> : null}
     </main>
     
     </>

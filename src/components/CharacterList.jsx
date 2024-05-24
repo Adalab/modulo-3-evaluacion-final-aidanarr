@@ -1,4 +1,5 @@
 import CharacterCard from "./CharacterCard"
+import "../styles/CharacterList.scss"
 
 export const CharacterList = (props) => {
 
@@ -9,7 +10,7 @@ export const CharacterList = (props) => {
     // Map que renderiza el componente CharacterCard con cada elemento del array de personajes
 
   return (
-    <section>
+    <section className="list-box">
       {props.filterCharas.map((chara) => <CharacterCard key={chara.id} chara={chara} />)}
     </section>
   )
