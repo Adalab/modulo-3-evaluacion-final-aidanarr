@@ -44,22 +44,21 @@ function App() {
         <Route path="/" element={
           <>
             <form className="form">
-              <Filters valueInput={valueInput} setValueInput={setValueInput} setNoCharaMsg={setNoCharaMsg} filterCharas={filterCharas} />
+              <Filters valueInput={valueInput} setValueInput={setValueInput} setNoCharaMsg={setNoCharaMsg} />
               <div className="form__select">
                 <FilterStatus valueStatus={valueStatus} setValueStatus={setValueStatus} />
                 <FilterSpecies valueSpecies={valueSpecies} setValueSpecies={setValueSpecies} />
               </div>
             </form>
-            <CharacterList noCharaMsg={noCharaMsg}  filterCharas={filterCharas} charaList={charaList}/>
+            <CharacterList filterCharas={filterCharas}/>
           </>
         }/>
         <Route path="/detail/:id" element={<CharacterDetail getCharaData={getCharaData} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       {/* Nos renderiza el texto de error en la búsqueda si el array del filtro está vacío */}
-    {filterCharas.length === 0 ? <div className="no-chara"><p>{noCharaMsg}</p></div> : null}
+      {filterCharas.length === 0 ? <div className="no-chara"><p>{noCharaMsg}</p></div> : null}
     </main>
-    
     </>
   )
 }

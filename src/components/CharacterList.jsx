@@ -1,5 +1,6 @@
 import CharacterCard from "./CharacterCard"
 import "../styles/CharacterList.scss"
+import PropTypes from "prop-types";
 
 export const CharacterList = (props) => {
 
@@ -15,5 +16,9 @@ export const CharacterList = (props) => {
     </section>
   )
 }
+
+CharacterList.propTypes = {
+  filterCharas: PropTypes.array,
+};
 
 export default CharacterList

@@ -1,4 +1,5 @@
 import "../styles/Filters.scss"
+import PropTypes from "prop-types";
 
 export const Filters = (props) => {
 
@@ -23,5 +24,11 @@ export const Filters = (props) => {
       <input className="input" type="text" id="name" onChange={handleChange} onKeyDown={handleKeyDown} value={props.valueInput} placeholder="Search here" />   
   )
 }
+
+Filters.propTypes = {
+  setNoCharaMsg: PropTypes.func,
+  setValueInput: PropTypes.func,
+  valueInput: PropTypes.string,
+};
 
 export default Filters

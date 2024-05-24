@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
 import "../styles/CharacterDetail.scss"
+import PropTypes from "prop-types";
 
 export const CharacterDetail = ({getCharaData}) => {
 
@@ -34,5 +35,9 @@ export const CharacterDetail = ({getCharaData}) => {
     
   )
 }
+
+CharacterDetail.propTypes = {
+  getCharaData: PropTypes.func,
+};
 
 export default CharacterDetail
