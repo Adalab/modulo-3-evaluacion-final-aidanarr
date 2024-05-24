@@ -1,6 +1,6 @@
 # Rick & Morty Character Finder
 
-![Morty icon](/morty.png)
+![Morty icon](/public/morty.png)
 
 Find your favourite Rick & Morty characters here. You can filter by name, status and species (be careful of spoilers though!).
 
