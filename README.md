@@ -1,8 +1,9 @@
-# React + Vite
+# Rick & Morty Character Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Morty icon](/public/images/morty.png)
 
-Currently, two official plugins are available:
+Find your favourite Rick & Morty characters here. You can filter by name, status and species (be careful of spoilers though!).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Evaluación final módulo 3 Adalab
+
+Proyecto para la evaluación final del módulo 3 (React) de Adalab. Buscador de personajes creado utilizando la API de [*rickandmortyapi*](https://rickandmortyapi.com/).

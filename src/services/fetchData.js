@@ -2,7 +2,7 @@
 // Función fetch
 
 const fetchData = () => {
-    return fetch("https://raw.githubusercontent.com/Adalab/rick-y-morty/master/data/rick-y-morty.json")
+    return fetch("https://rickandmortyapi.com/api/character")
     .then((response) => response.json())
     .then((responseData) => {    
       // Map para rellenar un objeto con los datos que queremos sacar de cada elemento del array  
